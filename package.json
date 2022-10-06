@@ -1,0 +1,19 @@
+
+{
+  "name": "umrecheninator-v4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "test",
+    "start": "electron ."
+  },
+  "author": "Felikan",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^21.0.1"
+  },
+  "dependencies": {
+    "requirejs": "^2.3.6"
+  }
+}
