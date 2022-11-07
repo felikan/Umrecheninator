@@ -1,8 +1,7 @@
-
 {
   "name": "umrecheninator-v4",
-  "version": "1.0.0",
-  "description": "",
+  "version": "4.2.0",
+  "description": "Tool to umrechiniere ze important stuff",
   "main": "main.js",
   "scripts": {
     "test": "test",
@@ -11,7 +10,8 @@
   "author": "Felikan",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^21.0.1"
+    "electron": "^21.0.1",
+    "electron-packager": "^16.0.0"
   },
   "dependencies": {
     "requirejs": "^2.3.6"

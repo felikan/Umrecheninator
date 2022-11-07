@@ -7,6 +7,7 @@ const path = require('path')
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    autoHideMenuBar: true,
     width: 1200,
     height: 768,
     webPreferences: {

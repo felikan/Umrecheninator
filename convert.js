@@ -1,9 +1,13 @@
 var fs = require("fs")
 
+
+
 function Initialize() {
+    const path = "./resources/app/units.json"
     const tbodyRef = document.getElementById('output').getElementsByTagName('tbody')[0];
-    readTextFile("./units.json", function(text){
-        const units = JSON.parse(text);
+    fs.readFile(path, "utf-8", function (err, data){
+        console.log("Hallo", data)
+        const units = JSON.parse(data);
         units.map((unit, i) => {
             const newRow = tbodyRef.insertRow()
             const newCell = newRow.insertCell()
@@ -20,8 +24,9 @@ function Initialize() {
     
 })}
 function Calc() {
-    readTextFile("./units.json", function(text) {
-        const units = JSON.parse(text);        
+    const path = "./resources/app/units.json"
+    fs.readFile(path, "utf-8", function (err, data) {
+        const units = JSON.parse(data);        
         units.map((unit, i) => {
         const value = () => {
             switch (document.getElementById('unit').value) {
@@ -37,51 +42,48 @@ function Calc() {
         }
         );
     })
+    if (document.getElementById("value").value == 420) {
+        document.getElementById("audio").play()
+    }
 }
 
 function AddUnit() {
     var newUnits = ""
-    readTextFile("./units.json", function(text) {
-        newUnits = JSON.parse(text);
+    const path = "./resources/app/units.json"
+    fs.readFile(path, "utf-8", function (err, data) {
+        newUnits = JSON.parse(data);
         const nameIn = document.getElementById("nameIn").value
         const sizeIn = (+document.getElementById("sizeIn").value)
         if (nameIn != "" && sizeIn != 0/* && JSON.stringify(newUnits).indexOf(nameIn) == -1*/) {
             newUnits = newUnits.concat({name: "in " + nameIn, size: sizeIn})
             console.log(newUnits)
             var write = JSON.stringify(newUnits)
-            fs.writeFile("units.json", write, function(err, result) {
+            fs.writeFile(path, write, function(err, result) {
                 if(err) console.log("error", err)
             })
             location.reload()
         }
+    })
+    const name = document.getElementById("nameIn").value
+    if (name == "Perry" || name == "Schnabeltier" || name == "Perry, das Schnabeltier" || name == "Perry das Schnabeltier") {
+        require('electron').shell.openExternal("https://www.youtube.com/watch?v=GLxpRH5mEEc");
     }
-)}
+}
 
 function Delete() {
     var DelUnits  = ""
-    readTextFile("./units.json", function(text) {
-        DelUnits = JSON.parse(text);
+    const path = "./resources/app/units.json"
+    fs.readFile(path, "utf-8", function (err, data) {
+        DelUnits = JSON.parse(data);
         DelUnits = DelUnits.slice(0, DelUnits.length - 1)
         console.log(DelUnits)
         var write = JSON.stringify(DelUnits)
-        fs.writeFile("units.json", write, function(err, result) {
+        fs.writeFile(path, write, function(err, result) {
             if(err) console.log("error", err)
         })
         location.reload()
         }    
 )}
-
-function readTextFile(file, callback) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.overrideMimeType("application/json");
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-        }
-    }
-    rawFile.send(null);
-}
 
 document.addEventListener("DOMContentLoaded", Initialize())
 document.getElementById("enter").addEventListener("click", Calc)
