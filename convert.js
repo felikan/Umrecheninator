@@ -3,7 +3,7 @@ var fs = require("fs")
 
 
 function Initialize() {
-    const path = "./resources/app/units.json"
+    const path = "./units.json"
     const tbodyRef = document.getElementById('output').getElementsByTagName('tbody')[0];
     fs.readFile(path, "utf-8", function (err, data){
         console.log("Hallo", data)
@@ -24,7 +24,7 @@ function Initialize() {
     
 })}
 function Calc() {
-    const path = "./resources/app/units.json"
+    const path = "./units.json"
     fs.readFile(path, "utf-8", function (err, data) {
         const units = JSON.parse(data);        
         units.map((unit, i) => {
@@ -49,7 +49,7 @@ function Calc() {
 
 function AddUnit() {
     var newUnits = ""
-    const path = "./resources/app/units.json"
+    const path = "./units.json"
     fs.readFile(path, "utf-8", function (err, data) {
         newUnits = JSON.parse(data);
         const nameIn = document.getElementById("nameIn").value
@@ -72,7 +72,7 @@ function AddUnit() {
 
 function Delete() {
     var DelUnits  = ""
-    const path = "./resources/app/units.json"
+    const path = "./units.json"
     fs.readFile(path, "utf-8", function (err, data) {
         DelUnits = JSON.parse(data);
         DelUnits = DelUnits.slice(0, DelUnits.length - 1)
